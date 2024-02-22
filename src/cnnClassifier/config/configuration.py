@@ -32,7 +32,7 @@ class ConfigurationManager:
     def get_prepare_base_model_config(self) -> PrepareBaseModelConfig:
         config = self.config.prepare_base_model
 
-        create_directories([config.root_dir])
+        create_directories([Path(config.root_dir)])
 
         prepare_base_model_config = PrepareBaseModelConfig(
             root_dir=Path(config.root_dir),
@@ -73,11 +73,11 @@ class ConfigurationManager:
     def get_evaluation_config(self) -> EvaluationConfig:
 
         evaluation_config = EvaluationConfig(
-            path_of_model=Path('artifacts/training/model.h5'),
+            path_of_model=Path(self.config.training.trained_model_path),
             training_data=os.path.join(
                 self.config.data_ingestion.unzip_dir, "kidney-ct-scan-image"),
             all_params=self.params,
-            mlflow_uri=os.environ.get('MLFLOW_TRACKING_URI'),
+            mlflow_uri=MLFLOW_TRACKING_URI,
             params_image_size=self.params.IMAGE_SIZE,
             params_batch_size=self.params.BATCH_SIZE,
         )
