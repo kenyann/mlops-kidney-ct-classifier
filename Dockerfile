@@ -6,4 +6,5 @@ WORKDIR /app
 COPY . /app
 RUN pip install -r requirements.txt
 
-CMD ["python3", "app.py"]
+# CMD ["python3", "app.py"]
+CMD ["gunicorn", "--worker=4", "--bind", "0.0.0.0:8080", "app:app"]
