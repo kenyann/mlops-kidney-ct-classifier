@@ -17,6 +17,9 @@ class ClientApp:
         self.classifier = PredictionPipeline(self.filename)
 
 
+clApp = ClientApp()
+
+
 @app.route("/", methods=["GET"])
 @cross_origin()
 def home():
@@ -40,6 +43,5 @@ def predictRoute():
 
 
 if __name__ == "__main__":
-    clApp = ClientApp()
 
     app.run(host='0.0.0.0', port=8080)
